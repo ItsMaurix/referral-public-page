@@ -1,421 +1,336 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Indicações</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        :root {
-            --bg-color: #FDFDFD;
-            --text-main: #1E293B;
-            --text-secondary: #64748B;
-            --text-muted: #94A3B8;
-            --primary-emerald: #4adeb0;
-            --primary-hover: #3bc79d;
-            --card-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
-            
-            --blue-bg: #eff6ff;
-            --blue-text: #2563eb;
-            --pink-bg: #fdf2f8;
-            --pink-text: #db2777;
-            --emerald-bg: #f0fdf4;
-            --emerald-text: #059669;
-            --amber-bg: #fffbeb;
-            --amber-text: #d97706;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compartilhar no WhatsApp</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding-bottom: 100px;
-            display: flex;
-            justify-content: center;
-        }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #e8fff1, #f6f8ff);
+      color: #18212f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 480px;
-            padding: 0 20px;
-        }
+    .container {
+      width: 100%;
+      max-width: 460px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 18px 50px rgba(20, 32, 54, 0.12);
+    }
 
-        header {
-            padding: 24px 0;
-            text-align: center;
-        }
+    .header {
+      margin-bottom: 20px;
+    }
 
-        header h1 {
-            font-size: 20px;
-            font-weight: 700;
-        }
+    .tag {
+      display: inline-block;
+      background: #e8fff1;
+      color: #128c4a;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+    }
 
-        .stats-container {
-            display: grid;
-            gap: 16px;
-        }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      line-height: 1.15;
+    }
 
-        .stat-card {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid #f8fafc;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            transition: transform 0.2s;
-        }
+    p {
+      margin: 0;
+      color: #647083;
+      font-size: 15px;
+      line-height: 1.45;
+    }
 
-        .stat-card:active {
-            transform: scale(0.98);
-        }
+    .preview {
+      margin: 22px 0;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #f3f5f8;
+      border: 1px solid #e3e8ef;
+    }
 
-        .stat-icon {
-            margin-bottom: 8px;
-        }
+    .preview img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
 
-        .stat-info h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #334155;
-        }
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
 
-        .stat-value-group {
-            text-align: right;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
-        }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      border: 1px solid #dce3ea;
+      border-radius: 14px;
+      padding: 14px;
+      resize: vertical;
+      font-size: 15px;
+      line-height: 1.45;
+      outline: none;
+    }
 
-        .stat-value-row {
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
-        }
+    textarea:focus {
+      border-color: #25d366;
+      box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.12);
+    }
 
-        .stat-number {
-            font-size: 36px;
-            font-weight: 900;
-            line-height: 1;
-        }
+    .buttons {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
 
-        .stat-unit {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 15px 16px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
 
-        .badge {
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 100px;
-        }
+    button:hover {
+      transform: translateY(-1px);
+      filter: brightness(0.98);
+    }
 
-        /* Badge variants */
-        .badge.blue { background-color: var(--blue-bg); color: var(--blue-text); }
-        .badge.pink { background-color: var(--pink-bg); color: var(--pink-text); }
-        .badge.emerald { background-color: var(--emerald-bg); color: var(--emerald-text); }
-        .badge.amber { background-color: var(--amber-bg); color: var(--amber-text); }
+    .primary {
+      background: #25d366;
+      color: white;
+    }
 
-        .faq-link {
-            margin-top: 16px;
-            background: white;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid #f8fafc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
+    .secondary {
+      background: #edf2f7;
+      color: #18212f;
+    }
 
-        .faq-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
+    .status {
+      margin-top: 14px;
+      min-height: 22px;
+      color: #647083;
+      font-size: 14px;
+    }
 
-        .history-list {
-            margin-top: 32px;
-        }
+    .hint {
+      margin-top: 18px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e3e8ef;
+      font-size: 13px;
+      color: #647083;
+    }
 
-        .history-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            margin-bottom: 12px;
-        }
+    .debug-section {
+      margin-top: 24px;
+      padding: 16px;
+      border-radius: 14px;
+      background: #f8fafc;
+      border: 1px solid #e3e8ef;
+    }
 
-        .history-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+    .debug-section h2 {
+      margin: 0 0 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #18212f;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
-        .history-icon {
-            width: 48px;
-            height: 48px;
-            background-color: var(--amber-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--amber-text);
-        }
+    .param-item {
+      margin-bottom: 12px;
+    }
 
-        .history-text p {
-            font-size: 14px;
-            font-weight: 700;
-        }
+    .param-item:last-child {
+      margin-bottom: 0;
+    }
 
-        .history-text span {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
+    .param-key {
+      font-size: 12px;
+      font-weight: 700;
+      color: #128c4a;
+      margin-bottom: 4px;
+    }
 
-        .history-amount {
-            font-size: 14px;
-            font-weight: 900;
-        }
+    .param-value {
+      font-size: 13px;
+      color: #18212f;
+      word-break: break-all;
+    }
 
-        .floating-button-container {
-            position: fixed;
-            bottom: 24px;
-            left: 0;
-            right: 0;
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            z-index: 100;
-        }
-
-        .btn-primary {
-            width: 100%;
-            max-width: 440px;
-            background-color: var(--primary-emerald);
-            color: white;
-            border: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            box-shadow: 0 10px 20px rgba(74, 222, 176, 0.2);
-            transition: all 0.2s;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            gap: 16px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--primary-emerald);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    .param-value pre {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: monospace;
+      font-size: 12px;
+      background: #edf2f7;
+      padding: 8px 10px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
 </head>
 <body>
-    <div id="loading" class="loading-overlay">
-        <div class="spinner"></div>
-        <p style="font-size: 14px; color: var(--text-secondary)">Carregando...</p>
+  <main class="container">
+    <section class="header">
+      <span class="tag">Compartilhamento</span>
+      <h1>Envie uma imagem com mensagem</h1>
+      <p>
+        Edite o texto abaixo e compartilhe pelo menu nativo do seu celular.
+      </p>
+    </section>
+
+    <section class="preview" aria-label="Prévia da imagem que será compartilhada">
+      <img src="sabrina.jpg" alt="Imagem que será compartilhada" />
+    </section>
+
+    <label for="message">Mensagem</label>
+    <textarea id="message">Oi, me chamo Maurício 👋
+
+Estou testando uma página que compartilha uma imagem junto com uma mensagem pelo WhatsApp.</textarea>
+
+    <div class="buttons">
+      <button class="primary" id="shareButton">Compartilhar imagem + texto</button>
+      <button class="secondary" id="textOnlyButton">Abrir WhatsApp só com texto</button>
     </div>
 
-    <div class="container">
-        <header>
-            <h1>Minhas indicações</h1>
-        </header>
+    <div class="status" id="status"></div>
 
-        <main>
-            <div class="stats-container" id="statsContainer">
-                <!-- Cards will be injected here -->
-            </div>
-
-            <div class="faq-link">
-                <div class="faq-content">
-                    <i data-lucide="help-circle" style="color: var(--text-muted); width: 20px;"></i>
-                    <span>Por que não recebi minha recompensa?</span>
-                </div>
-                <i data-lucide="chevron-right" style="color: #cbd5e1; width: 20px;"></i>
-            </div>
-
-            <div class="history-list" id="historyList">
-                <!-- History items will be injected here -->
-            </div>
-        </main>
+    <div class="hint">
+      Observação: o envio de imagem depende do suporte do navegador e do sistema operacional.
+      Em desktop, alguns navegadores podem compartilhar apenas texto.
     </div>
 
-    <div class="floating-button-container">
-        <button class="btn-primary">
-            <i data-lucide="upload" style="width: 20px;"></i>
-            Indicar amigos
-        </button>
+    <div class="debug-section" id="debugSection" style="display:none">
+      <h2>Query Params</h2>
+      <div id="paramsList"></div>
     </div>
+  </main>
 
-    <script>
-        function getReferralIdFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-        return params.get('id');
+  <script>
+    const messageInput = document.getElementById("message");
+    const shareButton = document.getElementById("shareButton");
+    const textOnlyButton = document.getElementById("textOnlyButton");
+    const statusEl = document.getElementById("status");
+
+    async function getImageFile() {
+      const res = await fetch("sabrina.jpg");
+      const blob = await res.blob();
+      return new File([blob], "imagem.jpg", { type: "image/jpeg" });
     }
 
-    async function fetchData() {
-        try {
-            const referralId = getReferralIdFromUrl();
+    async function shareImageAndText() {
+      statusEl.textContent = "Preparando compartilhamento...";
 
-            if (!referralId) {
-                throw new Error('ID de indicação não encontrado na URL.');
-            }
+      try {
+        const file = await getImageFile();
+        const message = messageInput.value.trim();
 
-            const endpoint = `https://api.facio.dev/referral/${referralId}/stats`;
+        const shareData = {
+          title: "Mensagem especial",
+          text: message,
+          files: [file]
+        };
 
-            const response = await fetch(endpoint);
-
-            if (!response.ok) {
-                throw new Error(`Erro HTTP: ${response.status}`);
-            }
-
-            const data = await response.json();
-            renderUI(data);
-            document.getElementById('loading').style.display = 'none';
-        } catch (error) {
-            console.error("Erro ao buscar dados:", error);
-            document.getElementById('loading').innerHTML = '<p>Erro ao carregar dados.</p>';
+        if (!navigator.share) {
+          statusEl.textContent = "Seu navegador não suporta compartilhamento nativo. Use a opção só com texto.";
+          return;
         }
+
+        if (navigator.canShare && !navigator.canShare({ files: [file] })) {
+          statusEl.textContent = "Seu navegador não consegue compartilhar imagem. Use a opção só com texto.";
+          return;
+        }
+
+        await navigator.share(shareData);
+        statusEl.textContent = "Compartilhamento aberto.";
+      } catch (error) {
+        statusEl.textContent = "Compartilhamento cancelado ou indisponível.";
+        console.log(error);
+      }
     }
 
-    window.onload = fetchData;
+    function openWhatsAppTextOnly() {
+      const message = encodeURIComponent(messageInput.value.trim());
+      const url = `https://wa.me/?text=${message}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
 
-        function renderUI(data) {
-            const statsContainer = document.getElementById('statsContainer');
-            const historyList = document.getElementById('historyList');
+    shareButton.addEventListener("click", shareImageAndText);
+    textOnlyButton.addEventListener("click", openWhatsAppTextOnly);
 
-            const stats = [
-                {
-                    icon: 'users',
-                    color: '#2563eb',
-                    label: 'Indicações',
-                    value: data.referrals,
-                    unit: 'pessoas',
-                    badge: 'Amigos que indiquei',
-                    badgeClass: 'blue'
-                },
-                {
-                    icon: 'trophy',
-                    color: '#db2777',
-                    label: 'Contratações',
-                    value: data.transactions,
-                    unit: 'pessoas',
-                    badge: 'Amigos que contrataram',
-                    badgeClass: 'pink'
-                },
-                {
-                    icon: 'wallet',
-                    color: '#059669',
-                    label: 'Pagamentos',
-                    value: data.payments,
-                    unit: 'pessoas',
-                    badge: 'Amigos que pagaram',
-                    badgeClass: 'emerald'
-                },
-                {
-                    icon: 'gem',
-                    color: '#d97706',
-                    label: 'Recompensas',
-                    value: data.totalRewards.replace('R$ ', ''),
-                    unit: 'reais',
-                    badge: 'Valor que já recebi',
-                    badgeClass: 'amber'
-                }
-            ];
+    const BASE64_PARAMS = new Set(["info", "payments"]);
 
-            statsContainer.innerHTML = stats.map(s => `
-                <div class="stat-card">
-                    <div class="stat-info">
-                        <div class="stat-icon">
-                            <i data-lucide="${s.icon}" style="color: ${s.color}; width: 32px; height: 32px;"></i>
-                        </div>
-                        <h3>${s.label}</h3>
-                    </div>
-                    <div class="stat-value-group">
-                        <div class="stat-value-row">
-                            <span class="stat-number">${s.value}</span>
-                            <span class="stat-unit">${s.unit}</span>
-                        </div>
-                        <span class="badge ${s.badgeClass}">${s.badge}</span>
-                    </div>
-                </div>
-            `).join('');
+    function tryDecodeBase64(value) {
+      try {
+        const decoded = atob(value);
+        return JSON.parse(decoded);
+      } catch {
+        return null;
+      }
+    }
 
-            historyList.innerHTML = data.history.map(item => `
-                <div class="history-item">
-                    <div class="history-left">
-                        <div class="history-icon">
-                            <i data-lucide="trophy" style="width: 20px; height: 20px;"></i>
-                        </div>
-                        <div class="history-text">
-                            <p>${item.date}</p>
-                            <span>Recompensa recebida</span>
-                        </div>
-                    </div>
-                    <div class="history-amount">+ ${item.amount}</div>
-                </div>
-            `).join('');
+    function renderParams() {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.size) return;
 
-            // Re-initialize Lucide icons after injection
-            lucide.createIcons();
+      document.getElementById("debugSection").style.display = "block";
+      const list = document.getElementById("paramsList");
+
+      for (const [key, raw] of params.entries()) {
+        const item = document.createElement("div");
+        item.className = "param-item";
+
+        const keyEl = document.createElement("div");
+        keyEl.className = "param-key";
+        keyEl.textContent = key;
+
+        const valEl = document.createElement("div");
+        valEl.className = "param-value";
+
+        if (BASE64_PARAMS.has(key)) {
+          const decoded = tryDecodeBase64(raw);
+          const pre = document.createElement("pre");
+          pre.textContent = decoded !== null
+            ? JSON.stringify(decoded, null, 2)
+            : raw;
+          valEl.appendChild(pre);
+        } else {
+          valEl.textContent = raw;
         }
 
-        // Run fetch on load
-        window.onload = fetchData;
-    </script>
+        item.appendChild(keyEl);
+        item.appendChild(valEl);
+        list.appendChild(item);
+      }
+    }
+
+    renderParams();
+  </script>
 </body>
 </html>
-
