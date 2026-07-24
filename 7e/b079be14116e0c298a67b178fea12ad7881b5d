@@ -1,0 +1,20 @@
+index.html
+  s_45325118de65c8::t_8adb46cbf1eaaf 233-237
+  s_45325118de65c8::t_e1956c28744397 339-398
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "7eb079be14116e0c298a67b178fea12ad7881b5d",
+  "prompts": {},
+  "sessions": {
+    "s_45325118de65c8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f050ca5-eb85-43da-b941-df23b0bda2f2",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mauricio Azevedo <mauricio.azevedo@facio.com>"
+    }
+  }
+}
