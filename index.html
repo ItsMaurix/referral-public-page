@@ -230,6 +230,11 @@ Estou testando uma página que compartilha uma imagem junto com uma mensagem pel
       <h2>Query Params</h2>
       <div id="paramsList"></div>
     </div>
+
+    <div class="debug-section" id="visitsSection">
+      <h2>Histórico de acessos</h2>
+      <div id="visitsList"></div>
+    </div>
   </main>
 
   <script>
@@ -331,6 +336,66 @@ Estou testando uma página que compartilha uma imagem junto com uma mensagem pel
     }
 
     renderParams();
+
+    const VISITS_STORAGE_KEY = "pageVisits";
+
+    function getStoredVisits() {
+      try {
+        const raw = localStorage.getItem(VISITS_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function recordVisit() {
+      const visits = getStoredVisits();
+      visits.push(new Date().toISOString());
+      try {
+        localStorage.setItem(VISITS_STORAGE_KEY, JSON.stringify(visits));
+      } catch (error) {
+        console.log("Não foi possível salvar o acesso:", error);
+      }
+      return visits;
+    }
+
+    function renderVisits(visits) {
+      const list = document.getElementById("visitsList");
+      list.innerHTML = "";
+
+      if (!visits.length) {
+        const empty = document.createElement("p");
+        empty.textContent = "Nenhum acesso registrado ainda.";
+        list.appendChild(empty);
+        return;
+      }
+
+      const formatter = new Intl.DateTimeFormat("pt-BR", {
+        dateStyle: "short",
+        timeStyle: "medium"
+      });
+
+      visits.forEach((iso, index) => {
+        const item = document.createElement("div");
+        item.className = "param-item";
+
+        const keyEl = document.createElement("div");
+        keyEl.className = "param-key";
+        keyEl.textContent = `Acesso ${index + 1}`;
+
+        const valEl = document.createElement("div");
+        valEl.className = "param-value";
+        const date = new Date(iso);
+        valEl.textContent = isNaN(date) ? iso : formatter.format(date);
+
+        item.appendChild(keyEl);
+        item.appendChild(valEl);
+        list.appendChild(item);
+      });
+    }
+
+    renderVisits(recordVisit());
   </script>
 </body>
 </html>
